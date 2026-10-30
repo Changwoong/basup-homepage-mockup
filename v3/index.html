@@ -19,9 +19,9 @@ a{color:inherit;text-decoration:none}img{display:block}
 .reduce #ld,.noload #ld{display:none}
 /* chrome */
 #prog{position:fixed;left:0;top:0;height:2px;width:100%;background:linear-gradient(90deg,var(--b),var(--v));transform:scaleX(0);transform-origin:left;z-index:120}
-nav{position:fixed;left:0;right:0;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,56px);transition:background .4s,height .4s,box-shadow .4s,transform .45s}
+nav{position:fixed;left:0;right:0;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,56px);transition:background .4s,height .4s,box-shadow .4s,transform .7s cubic-bezier(.2,.7,.2,1),opacity .7s}
 nav.solid{background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);height:60px;box-shadow:0 1px 0 var(--line)}
-nav.hide{transform:translateY(-100%)}
+nav{opacity:0;transform:translateY(-100%)}nav.in{opacity:1;transform:none}nav.in.hide{transform:translateY(-100%)}
 nav img{height:18px}nav ul{display:flex;gap:34px;list-style:none;font-size:13px;font-weight:600}
 nav li a{position:relative}nav li a:after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:currentColor;transform:scaleX(0);transition:transform .35s;transform-origin:right}nav li a:hover:after{transform:scaleX(1);transform-origin:left}
 #idx{position:fixed;right:clamp(16px,3vw,40px);bottom:clamp(18px,4vh,36px);z-index:90;display:flex;align-items:center;gap:12px;font-size:13px;mix-blend-mode:difference;color:#fff}
@@ -287,7 +287,7 @@ function reveal(scope,tl,at){const cs=scope.querySelectorAll('.split .c'),ls=sco
 function intro(){const tl=gsap.timeline();
  if(!RM&&!NOLOAD){const o={v:0};tl.to('#ld .lg',{clipPath:'inset(0 0% 0 0)',duration:.9,ease:'power3.inOut'}).to('#ld .bar i',{scaleX:1,duration:1.1,ease:'power2.inOut'},0).to(o,{v:100,duration:1.1,ease:'power2.inOut',onUpdate:()=>$('#pc').textContent=Math.round(o.v)},0)
   .to('#ld',{clipPath:'inset(0 0 100% 0)',duration:.9,ease:'expo.inOut'},'+=.15').set('#ld',{display:'none'})
-  .from('#hero .bg img',{scale:1.25,duration:2,ease:'expo.out'},'-=.6').from('#nav',{yPercent:-100,opacity:0,duration:.8,ease:'power3.out'},'<.2');}
+  .from('#hero .bg img',{scale:1.25,duration:2,ease:'expo.out'},'-=.6').call(()=>$('#nav').classList.add('in'),null,'<.2');}else $('#nav').classList.add('in');
  if(!RM)reveal($('#hero'),tl,RM||NOLOAD?0:'-=1.5');}
 /* cursor + magnetic */
 if(FINE&&!RM){document.documentElement.classList.add('fine');const cx=gsap.quickTo('#cur','x',{duration:.08}),cy=gsap.quickTo('#cur','y',{duration:.08}),rx=gsap.quickTo('#ring','x',{duration:.45,ease:'power3'}),ry=gsap.quickTo('#ring','y',{duration:.45,ease:'power3'});
