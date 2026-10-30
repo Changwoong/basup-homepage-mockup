@@ -1,0 +1,364 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BASUP — Skin Data Technology</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--t:#111;--m:#6b6b70;--l:#e4e4e8;--b:#0057ff;--v:#7a3cff;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+html,body{overflow-x:clip}
+body{font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;color:var(--t);background:#fff;-webkit-font-smoothing:antialiased;word-break:keep-all;
+ background-image:linear-gradient(var(--l) 1px,transparent 1px),linear-gradient(90deg,var(--l) 1px,transparent 1px);background-size:80px 80px;background-attachment:fixed}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--mono)}
+nav{position:sticky;top:0;z-index:50;height:52px;background:rgba(255,255,255,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--t)}
+nav .in{max-width:1280px;margin:auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:12px}
+nav img{height:15px}nav ul{display:flex;gap:26px;list-style:none;font-family:var(--mono);font-size:11px;letter-spacing:.04em}
+nav ul li b{color:var(--b);font-weight:500}
+nav .btn{border:1px solid var(--t);padding:6px 12px;font-family:var(--mono);font-size:11px}
+nav .btn:hover{background:var(--t);color:#fff}
+.wrap{max-width:1280px;margin:auto;padding:0 24px}
+.fig{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--m);display:flex;gap:16px;border-bottom:1px solid var(--t);padding:10px 0;justify-content:space-between}
+.fig b{color:var(--t);font-weight:700}
+h1{font-size:clamp(46px,8vw,112px);font-weight:700;letter-spacing:-.045em;line-height:.98}
+h2{font-size:clamp(34px,5vw,68px);font-weight:700;letter-spacing:-.035em;line-height:1.04}
+.lead{font-size:clamp(16px,1.6vw,20px);color:var(--m);line-height:1.55;max-width:560px;margin-top:18px}
+.btnp{display:inline-block;background:var(--t);color:#fff;padding:13px 22px;font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+.btno{display:inline-block;border:1px solid var(--t);padding:12px 22px;font-family:var(--mono);font-size:13px;background:#fff}
+.demo{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:#c2410c;border:1px solid #f3c6a8;background:#fff7f0;padding:3px 7px}
+.panel{background:#fff;border:1px solid var(--t)}
+section{position:relative}
+
+/* hero */
+.hero{min-height:calc(100vh - 52px);display:grid;grid-template-columns:1fr 1.1fr;gap:0;border-bottom:1px solid var(--t)}
+.hero .l{padding:56px 40px 40px 0;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--t)}
+.hero .r{position:relative;min-height:520px;background:rgba(255,255,255,.6)}
+#mesh{position:absolute;inset:0;width:100%;height:100%}
+.hud{position:absolute;font-family:var(--mono);font-size:11px;color:var(--t);line-height:1.6}
+.hud.tl{left:16px;top:14px}.hud.tr{right:16px;top:14px;text-align:right}.hud.bl{left:16px;bottom:14px}
+#stream{position:absolute;right:16px;top:64px;width:260px;height:200px;overflow:hidden;font-family:var(--mono);font-size:10.5px;line-height:1.55;color:#333;background:rgba(255,255,255,.85);border:1px solid var(--t);padding:8px 10px}
+#stream .k{color:var(--b)}
+.kv{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--t);margin-top:40px}
+.kv div{padding:14px 12px 0 0}.kv b{font-family:var(--mono);font-size:clamp(20px,2vw,28px);font-weight:500;display:block;letter-spacing:-.02em}.kv span{font-size:12px;color:var(--m)}
+
+/* pinned */
+.pin{position:relative}
+.stick{position:sticky;top:52px;height:calc(100vh - 52px);overflow:hidden;display:flex;flex-direction:column}
+.stick .wrap{width:100%;flex:1;display:flex;flex-direction:column;min-height:0}
+.body{flex:1;display:grid;grid-template-columns:.9fr 1.3fr;gap:40px;padding:28px 0;min-height:0;align-items:center}
+.txt .no{font-family:var(--mono);font-size:12px;color:var(--b);margin-bottom:14px}
+.prog{height:2px;background:var(--l);margin-top:24px;max-width:360px}.prog i{display:block;height:100%;width:0;background:var(--t)}
+
+/* scan */
+#s1{height:420vh;background:#fff}
+.scanv{display:grid;grid-template-columns:1fr 1fr;gap:0;height:100%;max-height:560px}
+.scanv svg{width:100%;height:100%;border:1px solid var(--t);border-right:0;background:#fff}
+.tbl{border:1px solid var(--t);font-family:var(--mono);font-size:12px;display:flex;flex-direction:column;background:#fff}
+.tbl .row{display:grid;grid-template-columns:34px 1fr 52px 54px;border-bottom:1px solid var(--l);padding:9px 12px;color:#aaa;transition:all .25s}
+.tbl .row.on{color:var(--t)}.tbl .row.cur{background:#f0f5ff;color:var(--b)}
+.tbl .row .st{text-align:right}
+.met{padding:12px;display:grid;gap:8px;margin-top:auto;border-top:1px solid var(--t)}
+.met .m{display:grid;grid-template-columns:90px 1fr 34px;gap:10px;align-items:center;font-size:11px}
+.met .bar{height:4px;background:var(--l)}.met .bar i{display:block;height:100%;width:0;background:var(--b)}
+.met .m b{text-align:right;font-weight:500}
+
+/* matrix */
+#s2{height:300vh;background:#fff}
+.mx{display:grid;grid-template-columns:repeat(24,1fr);border-top:1px solid var(--t);border-left:1px solid var(--t);background:#fff;position:relative}
+.mx div{aspect-ratio:1;border-right:1px solid var(--l);border-bottom:1px solid var(--l);font-family:var(--mono);font-size:7px;color:transparent;display:flex;align-items:center;justify-content:center;cursor:crosshair;transition:background .2s}
+.mx div.f{background:#e3ebff}.mx div.f2{background:#b9ccff}
+.mx div.hit{background:var(--b);color:#fff;font-size:8px}
+.mx div:hover{background:var(--t);color:#fff}
+.mxinfo{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;padding:8px 0;border-bottom:1px solid var(--t)}
+.mxwrap{border-right:1px solid var(--t)}
+
+/* flow */
+#s3{height:360vh;background:#fff}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);align-items:stretch;gap:0;border:1px solid var(--t);background:#fff}
+.node{padding:18px 14px;border-right:1px solid var(--t);position:relative;opacity:.25;transition:opacity .4s;min-height:200px;display:flex;flex-direction:column}
+.node:last-child{border-right:0}
+.node.on{opacity:1}
+.node small{font-family:var(--mono);font-size:10px;color:var(--m)}
+.node b{font-family:var(--mono);font-size:clamp(20px,2.2vw,30px);font-weight:500;display:block;margin:10px 0 6px;letter-spacing:-.02em}
+.node p{font-size:13px;color:var(--m);line-height:1.45}
+.node canvas{width:100%;height:70px;margin-top:auto}
+.node .arr{position:absolute;right:-9px;top:50%;width:17px;height:17px;background:#fff;border:1px solid var(--t);z-index:2;font-family:var(--mono);font-size:10px;display:flex;align-items:center;justify-content:center}
+.node:last-child .arr{display:none}
+.out{display:grid;gap:6px;margin-top:auto}.out span{font-family:var(--mono);font-size:12px;border:1px solid var(--t);padding:6px 8px;display:flex;justify-content:space-between}
+
+/* gbl */
+#s4{height:330vh;background:#fff}
+#mol{width:100%;height:100%;border:1px solid var(--t);background:#fff;display:block}
+.cards{display:grid;gap:0;border:1px solid var(--t);margin-top:22px;background:#fff}
+.cards div{padding:12px 14px;border-bottom:1px solid var(--l);opacity:.3;transition:opacity .4s}.cards div:last-child{border:0}
+.cards div.on{opacity:1}.cards b{font-family:var(--mono);font-size:13px}.cards p{font-size:13px;color:var(--m);margin-top:3px}
+.cards i{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--b);margin-left:8px}
+
+/* device */
+#s5{height:420vh;background:#fff}
+#dev{width:100%;height:100%;display:block;border:1px solid var(--t);background:#fff}
+
+/* lineup */
+.line{border-top:1px solid var(--t);padding:100px 0}
+.lu{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--t);margin-top:40px;background:#fff}
+.lu div{border-right:1px solid var(--t);padding:20px;text-align:center}.lu div:last-child{border:0}
+.lu img{height:240px;object-fit:contain;display:block;margin:10px auto;mix-blend-mode:multiply}
+.lu small{font-family:var(--mono);font-size:11px;color:var(--m);display:block;text-align:left}
+.lu b{font-size:20px}
+.cta{border:1px solid var(--t);background:var(--t);color:#fff;padding:60px 40px;margin:60px 0 100px;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.cta h2{font-size:clamp(30px,4vw,54px)}.cta .btnp{background:#fff;color:var(--t)}.cta .btno{background:transparent;border-color:#fff;color:#fff}
+footer{border-top:1px solid var(--t);background:#fff;font-family:var(--mono);font-size:11px;color:var(--m);padding:22px 0;line-height:1.8}
+.rv{opacity:0;transform:translateY(24px);transition:all .9s cubic-bezier(.2,.7,.2,1)}.rv.on{opacity:1;transform:none}
+
+@media(max-width:860px){
+ nav ul{display:none}
+ body{background-size:40px 40px}
+ .hero{grid-template-columns:1fr}.hero .l{border-right:0;padding:36px 0 24px}.hero .r{min-height:420px;border-top:1px solid var(--t);margin:0 -24px}
+ #stream{width:200px;height:120px;font-size:9.5px}.hud{font-size:9.5px}
+ .kv{grid-template-columns:1fr 1fr;margin-top:24px}.kv div{padding-bottom:10px}
+ .body{grid-template-columns:1fr;gap:12px;padding:14px 0;align-content:start}
+ .txt h2{font-size:30px}.txt .lead{font-size:14px;margin-top:8px}.txt .no{margin-bottom:6px}.prog{margin-top:10px}
+ .scanv{grid-template-columns:1fr 1.15fr;max-height:none;height:auto}.scanv svg{height:300px}
+ .tbl{font-size:10px}.tbl .row{grid-template-columns:20px 1fr 30px;padding:6px 7px}.tbl .row .lt{display:none}
+ .met{padding:8px;gap:5px}.met .m{grid-template-columns:52px 1fr 24px;font-size:9.5px;gap:5px}
+ .flow{grid-template-columns:1fr}.node{border-right:0;border-bottom:1px solid var(--t);min-height:0;padding:9px 12px;display:grid;grid-template-columns:90px 1fr;column-gap:10px;align-items:center}
+ .node b{font-size:17px;margin:0;grid-row:span 2}.node small{grid-column:2}.node p{font-size:11.5px;grid-column:2}.node canvas,.node .arr{display:none}
+ .out{grid-column:1/-1;grid-template-columns:repeat(3,1fr);margin-top:6px}.out span{font-size:10px;padding:4px 5px}
+ .mx div{font-size:0!important}
+ #mol{height:36vh}.cards{margin-top:10px}.cards div{padding:7px 10px}.cards p{font-size:11.5px}
+ #dev{height:58vh}
+ .lu{grid-template-columns:1fr}.lu div{border-right:0;border-bottom:1px solid var(--t)}.lu img{height:180px}
+ .cta{padding:36px 22px}
+}
+</style></head><body>
+<nav><div class="in"><img src="assets/basup-logo.png" alt="BASUP"><ul><li><b>01</b> SCAN</li><li><b>02</b> MATRIX</li><li><b>03</b> FORMULA</li><li><b>04</b> G.B.L</li><li><b>05</b> ULTRA</li><li><b>06</b> LAB</li></ul><a class="btn" href="#">AI 피부 분석 →</a></div></nav>
+
+<section><div class="wrap"><div class="hero">
+ <div class="l">
+  <div><div class="fig" style="border:0;padding:0;margin-bottom:28px"><span><b>BASUP</b> / SKIN DATA TECHNOLOGY</span><span>EST. R&amp;D 43+ YRS</span></div>
+  <p class="mono rv" style="font-size:13px;color:var(--b);margin-bottom:14px">// INTRODUCING</p>
+  <h1 class="rv">피부를<br>데이터로<br>읽다.</h1>
+  <p class="lead rv">BASUP은 AI 피부 측정 기술로 피부를 수치화하고, 그 데이터로 처방을 설계합니다. 삼성전자 출신 개발진의 AI 분석 기술 × 43년 K-Beauty 연구 노하우.</p>
+  <div class="rv" style="display:flex;gap:10px;margin-top:28px;flex-wrap:wrap"><a class="btnp" href="#">AI 피부 분석 시작 →</a><a class="btno" href="#s1">기술 살펴보기</a></div></div>
+  <div class="kv rv"><div><b>43+</b><span>년 K-Beauty R&amp;D</span></div><div><b>20,000+</b><span>보유 레서피</span></div><div><b>288</b><span>스킨 타입 매트릭스</span></div><div><b>85%</b><span>재구독률</span></div></div>
+ </div>
+ <div class="r"><canvas id="mesh"></canvas>
+  <div class="hud tl">FIG.01 — FACE SCAN MESH<br><span style="color:var(--m)">3D WIREFRAME · REALTIME</span></div>
+  <div class="hud tr"><span id="rot">ROT Y +00.0°</span><br><span id="ply">Z-PLANE 0.000</span></div>
+  <div class="hud bl"><span class="demo">DEMO DATA · 시각화용</span></div>
+  <div id="stream"></div>
+ </div>
+</div></div></section>
+
+<!-- 01 SCAN -->
+<section id="s1" class="pin"><div class="stick"><div class="wrap">
+ <div class="fig"><span><b>FIG.02</b> AI SKIN SCAN PRINCIPLE</span><span>3 ZONES × 2 LIGHT SOURCES = 6 SCANS</span></div>
+ <div class="body">
+  <div class="txt"><p class="no">01 / SCAN</p><h2>6번의 스캔,<br>5개의 지표.</h2>
+   <p class="lead">피부 현미경 카메라를 컴퓨터 또는 태블릿에 연결해 측정합니다. 이마(T-zone), 양 볼(U-zone)을 LED와 UV 광원으로 각각 촬영해 총 6회 스캔합니다.</p>
+   <div class="prog"><i id="p1"></i></div></div>
+  <div class="scanv">
+   <svg id="facesvg" viewBox="0 0 300 380" preserveAspectRatio="xMidYMid meet">
+    <defs><pattern id="gp" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M10 0H0V10" fill="none" stroke="#eee" stroke-width=".6"/></pattern></defs>
+    <rect width="300" height="380" fill="url(#gp)"/>
+    <path d="M150 40 C215 40 245 95 245 170 C245 255 205 330 150 345 C95 330 55 255 55 170 C55 95 85 40 150 40Z" fill="none" stroke="#111" stroke-width="1.2"/>
+    <path d="M110 165 q12 -7 24 0 M166 165 q12 -7 24 0 M150 175 v40 q-6 6 -12 4 M128 262 q22 12 44 0" fill="none" stroke="#111" stroke-width="1"/>
+    <g id="zones" font-family="JetBrains Mono,monospace" font-size="8">
+     <rect data-z="0" x="105" y="72" width="90" height="56" fill="none" stroke="#bbb" stroke-dasharray="3 3"/><text x="105" y="67">Z1 T-ZONE · 이마</text>
+     <rect data-z="1" x="68" y="196" width="62" height="56" fill="none" stroke="#bbb" stroke-dasharray="3 3"/><text x="62" y="268">Z2 U · 왼쪽 볼</text>
+     <rect data-z="2" x="170" y="196" width="62" height="56" fill="none" stroke="#bbb" stroke-dasharray="3 3"/><text x="170" y="268">Z3 U · 오른쪽 볼</text>
+    </g>
+    <line id="sline" x1="0" x2="0" y1="0" y2="0" stroke="#0057ff" stroke-width="2"/>
+    <text x="8" y="372" font-family="JetBrains Mono,monospace" font-size="8" fill="#6b6b70">SCHEMATIC · NOT TO SCALE</text>
+   </svg>
+   <div class="tbl" id="tbl">
+    <div class="row" style="color:var(--m);background:#fafafa"><span>#</span><span>ZONE</span><span class="lt">LIGHT</span><span class="st">STATUS</span></div>
+    <div class="met" id="met"><span class="demo" style="justify-self:start">DEMO 측정값 · 실제 결과 아님</span></div>
+   </div>
+  </div></div></div></div></section>
+
+<!-- 02 MATRIX -->
+<section id="s2" class="pin"><div class="stick"><div class="wrap">
+ <div class="fig"><span><b>FIG.03</b> SKIN-TYPE MATRIX</span><span>24 × 12 = 288 CELLS</span></div>
+ <div class="body">
+  <div class="txt"><p class="no">02 / MATRIX</p><h2>288개의<br>스킨 타입.</h2>
+   <p class="lead">측정된 피부 데이터는 288개 스킨 타입 매트릭스 위에 매핑됩니다. 셀에 마우스를 올려보세요.</p>
+   <div class="prog"><i id="p2"></i></div></div>
+  <div class="mxwrap"><div class="mxinfo"><span id="mxi">TYPE ---</span><span id="mxc">ROW -- · COL --</span></div><div class="mx" id="mx"></div>
+   <div class="mxinfo" style="border:0"><span class="demo">MATCH 셀 위치는 데모</span><span id="mxs">MAPPED 000 / 288</span></div></div>
+ </div></div></div></section>
+
+<!-- 03 FLOW -->
+<section id="s3" class="pin"><div class="stick"><div class="wrap">
+ <div class="fig"><span><b>FIG.04</b> PRESCRIPTION ALGORITHM</span><span>INPUT → MATRIX → FORMULA</span></div>
+ <div class="body" style="grid-template-columns:1fr">
+  <div class="txt"><p class="no">03 / FORMULA</p><h2>20,000개의 레서피에서<br>3단계 처방으로.</h2><div class="prog"><i id="p3"></i></div></div>
+  <div class="flow" id="flow">
+   <div class="node"><small>IN.01</small><b>6 SCANS</b><p>LED·UV 피부 이미지 데이터</p><canvas></canvas><span class="arr">→</span></div>
+   <div class="node"><small>PROC.01</small><b>5 METRICS</b><p>수분·유분(피지)·탄력/주름·색소·민감도 분석</p><canvas></canvas><span class="arr">→</span></div>
+   <div class="node"><small>PROC.02</small><b>288 TYPES</b><p>스킨 타입 매트릭스 매핑</p><canvas></canvas><span class="arr">→</span></div>
+   <div class="node"><small>DB</small><b>20,000+</b><p>보유 레서피에서 피부 데이터에 맞는 성분 선별</p><canvas></canvas><span class="arr">→</span></div>
+   <div class="node"><small>OUT</small><b>1:1 FORMULA</b><p>3단계 레이어링 루틴</p><div class="out"><span>STEP 01 <em>앰플</em></span><span>STEP 02 <em>세럼</em></span><span>STEP 03 <em>에센스</em></span></div></div>
+  </div></div></div></div></section>
+
+<!-- 04 GBL -->
+<section id="s4" class="pin"><div class="stick"><div class="wrap">
+ <div class="fig"><span><b>FIG.05</b> G.B.L BIO ENGINE</span><span>FERMENTATION-BASED SKIN BIO-ENGINE</span></div>
+ <div class="body">
+  <div class="txt"><p class="no">04 / G.B.L</p><h2>발효 과학을<br>엔진으로.</h2>
+   <p class="lead">피부 데이터에 따라 필요한 성분을 선별하고, 피부가 받아들이기 쉬운 구조로 설계하는 발효 기반 Skin Bio-Engine.</p>
+   <div class="cards" id="gcards">
+    <div><b>G — Galactomyces</b><i>피부결 · 피지 밸런스</i><p>맑고 투명한 피부 인상을 위한 발효 성분</p></div>
+    <div><b>B — Bifida</b><i>피부 장벽 · 리페어</i><p>밤사이 일어나는 피부 리페어</p></div>
+    <div><b>L — Lactobacillus</b><i>마이크로바이옴</i><p>피부 마이크로바이옴 밸런서</p></div></div></div>
+  <canvas id="mol"></canvas>
+ </div></div></div></section>
+
+<!-- 05 DEVICE -->
+<section id="s5" class="pin"><div class="stick"><div class="wrap">
+ <div class="fig"><span><b>FIG.06</b> SKINLAB ULTRA — FUNCTION LAYERS</span><span>EP · EMS · RF · HIFU · LED</span></div>
+ <div class="body">
+  <div class="txt"><p class="no">05 / ULTRA</p><h2>5가지 기술,<br>하나의 시스템.</h2>
+   <p class="lead">흡수, 활성화, 탄력, 리프팅, 회복까지. 바르는 스킨케어를 작동하는 스킨케어로.</p>
+   <p class="mono" style="font-size:10px;color:var(--m);margin-top:12px">* 기능 레이어 개념도 · 실제 하드웨어 구조와 다름</p>
+   <div class="prog"><i id="p5"></i></div></div>
+  <canvas id="dev"></canvas>
+ </div></div></div></section>
+
+<section class="line"><div class="wrap">
+ <div class="fig"><span><b>FIG.07</b> OUTPUT — PERSONALIZED ROUTINE</span><span>AMPOULE · SERUM · ESSENCE</span></div>
+ <h2 class="rv" style="margin-top:40px">데이터가 만든<br>당신만의 3단계.</h2>
+ <div class="lu"><div class="rv"><small>STEP 01</small><img src="assets/product-ampoule.webp" alt=""><b>앰플</b></div><div class="rv"><small>STEP 02</small><img src="assets/product-serum.webp" alt=""><b>세럼</b></div><div class="rv"><small>STEP 03</small><img src="assets/product-essence.webp" alt=""><b>에센스</b></div></div>
+ <div class="cta rv"><div><p class="mono" style="font-size:12px;opacity:.7;margin-bottom:10px">// START YOUR SCAN</p><h2>측정에서 시작하세요.</h2></div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btnp" href="#">무료 상담 예약 →</a><a class="btno" href="#">멤버십·유통 신청</a></div></div>
+</div></section>
+<footer><div class="wrap">BASUP / SKINLAB KOREA CO., LTD. — 프리미엄 AI 스킨테크 플랫폼<br>* DEMO 표시 수치·스트림 데이터는 시각화용 예시입니다.<br>© 2026 Skinlab Korea Co., Ltd. All Rights Reserved.</div></footer>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),seg=(p,a,b)=>cl((p-a)/(b-a)),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const prog=el=>{const r=el.getBoundingClientRect();return cl(-r.top/(r.height-innerHeight))};
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target)}}),{threshold:.1});
+$$('.rv').forEach(e=>io.observe(e));
+function fit(cv){const r=cv.getBoundingClientRect(),d=devicePixelRatio||1;if(cv.width!=Math.round(r.width*d)||cv.height!=Math.round(r.height*d)){cv.width=r.width*d;cv.height=r.height*d}const c=cv.getContext('2d');c.setTransform(d,0,0,d,0,0);return[c,r.width,r.height]}
+
+/* HERO mesh */
+const mesh=$('#mesh');
+function headPt(u,v){
+ let rr=Math.pow(Math.max(0,1-Math.pow(Math.abs(u),2.2)),1/2.2);
+ if(u<0)rr*=1-.42*Math.pow(-u,1.5);
+ const y=u*1.3;let x=Math.sin(v)*rr*.8,z=Math.cos(v)*rr*.82;
+ const f=Math.max(0,Math.cos(v))**2;
+ z+=.30*Math.exp(-(x*x)/.008-((u+.02)**2)/.04)*f*(u<.25?1:0)+.02;
+ z-=.13*Math.exp(-((Math.abs(x)-.3)**2)/.015-((u-.2)**2)/.008)*f;
+ z+=.06*Math.exp(-((Math.abs(x)-.28)**2)/.04-((u-.32)**2)/.004)*f;
+ z+=.05*Math.exp(-(x*x)/.02-((u+.38)**2)/.003)*f;
+ z+=.04*Math.exp(-((Math.abs(x)-.42)**2)/.03-((u+.02)**2)/.02)*f;
+ return[x,y,z]}
+const LAT=44,LON=56,P=[];for(let i=0;i<=LAT;i++){const row=[];for(let j=0;j<LON;j++)row.push(headPt(-1+2*i/LAT,j/LON*Math.PI*2));P.push(row)}
+function drawMesh(t){
+ const[c,W,H]=fit(mesh);c.clearRect(0,0,W,H);
+ const ry=Math.sin(t*.35)*.6,cs=Math.cos(ry),sn=Math.sin(ry),S=Math.min(W,H)*.34,cx=W*.36,cy=H*.48;
+ const plane=Math.sin(t*.8)*1.1;
+ $('#rot').textContent='ROT Y '+(ry*57.3>=0?'+':'')+(ry*57.3).toFixed(1).padStart(4,'0')+'°';$('#ply').textContent='Y-PLANE '+plane.toFixed(3);
+ const pr=([x,y,z])=>{const X=x*cs+z*sn,Z=-x*sn+z*cs;const k=3.2/(3.2-Z*.6);return[cx+X*S*k,cy-y*S*k,Z]};
+ const Q=P.map(r=>r.map(pr));
+ c.lineWidth=.6;
+ for(let i=0;i<=LAT;i++)for(let j=0;j<LON;j++){
+  const a=Q[i][j],b=Q[i][(j+1)%LON],d=i<LAT?Q[i+1][j]:null,y=P[i][j][1];
+  const near=Math.abs(y-plane)<.07,front=a[2]>-.1;
+  c.strokeStyle=near?'rgba(0,87,255,.95)':front?'rgba(17,17,17,.38)':'rgba(17,17,17,.06)';
+  c.beginPath();c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);if(d){c.moveTo(a[0],a[1]);c.lineTo(d[0],d[1])}c.stroke();
+  if(near&&front&&j%3==0){c.fillStyle='#0057ff';c.fillRect(a[0]-1.5,a[1]-1.5,3,3)}
+ }
+ const py=cy-plane*S;c.strokeStyle='rgba(0,87,255,.35)';c.setLineDash([4,4]);c.beginPath();c.moveTo(0,py);c.lineTo(W,py);c.stroke();c.setLineDash([]);
+ // markers
+ [[0,.5,'Z1'],[-.36,-.08,'Z2'],[.36,-.08,'Z3']].forEach(([x,y,l])=>{const z=Math.sqrt(Math.max(0,1-x*x-(y/1.25)**2))*.95;const p=pr([x,y,z]);if(p[2]<0)return;
+  c.strokeStyle='#0057ff';c.lineWidth=1;c.strokeRect(p[0]-7,p[1]-7,14,14);c.beginPath();c.moveTo(p[0]+7,p[1]-7);c.lineTo(p[0]+30,p[1]-24);c.lineTo(p[0]+56,p[1]-24);c.stroke();
+  c.fillStyle='#111';c.font='10px JetBrains Mono,monospace';c.fillText(l+' '+(p[0]/W*100).toFixed(1)+','+(p[1]/H*100).toFixed(1),p[0]+32,p[1]-28)});
+}
+const st=$('#stream'),keys=['MOIST','SEBUM','ELAST','PIGMT','SENSV'];let ln=0;
+setInterval(()=>{const k=keys[ln%5],z=['Z1','Z2','Z3'][Math.floor(ln/5)%3],L=Math.floor(ln/15)%2?'UV ':'LED';ln++;
+ const v=(40+Math.random()*45).toFixed(1);st.insertAdjacentHTML('beforeend',`<div>${String(ln).padStart(4,'0')} ${z} ${L} <span class="k">${k}</span> ${v.padStart(5)} <span style="color:#999">ok</span></div>`);
+ while(st.children.length>16)st.firstChild.remove()},180);
+
+/* S1 scan */
+const SC=[['Z1','이마','LED'],['Z1','이마','UV'],['Z2','왼쪽 볼','LED'],['Z2','왼쪽 볼','UV'],['Z3','오른쪽 볼','LED'],['Z3','오른쪽 볼','UV']];
+const tbl=$('#tbl'),met=$('#met');
+SC.forEach((s,i)=>met.insertAdjacentHTML('beforebegin',`<div class="row"><span>0${i+1}</span><span>${s[0]} ${s[1]}</span><span class="lt">${s[2]}</span><span class="st">WAIT</span></div>`));
+const MT=[['수분','MOIST',72],['유분','SEBUM',38],['탄력','ELAST',81],['색소','PIGMT',24],['민감도','SENSV',46]];
+MT.forEach(m=>met.insertAdjacentHTML('beforeend',`<div class="m"><span>${m[0]} <span style="color:#999">${m[1]}</span></span><div class="bar"><i></i></div><b>0</b></div>`));
+const rows=$$('#tbl .row').slice(1),zr=$$('#zones rect'),sl=$('#sline');
+function s1(p){$('#p1').style.width=p*100+'%';const q=seg(p,.05,.9),n=q*6,i=Math.min(5,Math.floor(n)),f=n-i;
+ rows.forEach((r,k)=>{r.classList.toggle('on',k<=i&&q>0);r.classList.toggle('cur',k==i&&q<1&&q>0);r.lastChild.textContent=k<i||q>=1?'DONE':k==i&&q>0?(f*100|0)+'%':'WAIT'});
+ zr.forEach((z,k)=>{const a=k==(i>>1)&&q<1&&q>0,d=k<(i>>1)||q>=1;z.setAttribute('stroke',a?(i%2?'#7a3cff':'#0057ff'):d?'#111':'#bbb');z.setAttribute('fill',a?(i%2?'rgba(122,60,255,.08)':'rgba(0,87,255,.08)'):'none');z.setAttribute('stroke-dasharray',a||d?'':'3 3')});
+ if(q>0&&q<1){const z=zr[i>>1],x=+z.getAttribute('x'),y=+z.getAttribute('y'),w=+z.getAttribute('width'),h=+z.getAttribute('height'),yy=y+h*(.5-.5*Math.cos(f*Math.PI*2));
+  sl.setAttribute('x1',x-6);sl.setAttribute('x2',x+w+6);sl.setAttribute('y1',yy);sl.setAttribute('y2',yy);sl.setAttribute('stroke',i%2?'#7a3cff':'#0057ff');sl.style.opacity=1}else sl.style.opacity=0;
+ $$('#met .m').forEach((m,k)=>{const v=Math.round(MT[k][2]*ease(cl(q*1.05-k*.03)));m.querySelector('b').textContent=v;m.querySelector('i').style.width=v+'%'})}
+
+/* S2 matrix */
+const mx=$('#mx');for(let i=0;i<288;i++){const d=document.createElement('div');d.textContent=String(i+1).padStart(3,'0');d.onmouseenter=()=>{$('#mxi').textContent='TYPE '+d.textContent;$('#mxc').textContent='ROW '+String((i/24|0)+1).padStart(2,'0')+' · COL '+String(i%24+1).padStart(2,'0')};mx.appendChild(d)}
+const cells=[...mx.children],ord=cells.map((c,i)=>i).sort((a,b)=>((a*7919)%288)-((b*7919)%288)),HIT=137;
+function s2(p){$('#p2').style.width=p*100+'%';const n=Math.round(seg(p,.05,.7)*288);
+ ord.forEach((ci,k)=>{cells[ci].classList.toggle('f',k<n);cells[ci].classList.toggle('f2',k<n&&k>n-12)});
+ $('#mxs').textContent='MAPPED '+String(n).padStart(3,'0')+' / 288';
+ const h=p>.8;cells[HIT].classList.toggle('hit',h);if(h&&!mx.matches(':hover')){$('#mxi').textContent='MATCH → TYPE 138';$('#mxc').textContent='ROW 06 · COL 18'}}
+
+/* S3 flow */
+const nodes=$$('#flow .node');
+function s3(p,t){$('#p3').style.width=p*100+'%';const k=Math.floor(seg(p,.05,.85)*5.0001);
+ nodes.forEach((n,i)=>{n.classList.toggle('on',i<=k-1||(i==0&&p>.02));const cv=n.querySelector('canvas');if(!cv||!cv.offsetWidth)return;const[c,W,H]=fit(cv);c.clearRect(0,0,W,H);c.strokeStyle='#111';c.lineWidth=.8;
+  if(i==0){for(let a=0;a<6;a++){c.strokeRect(4+a*(W-8)/6,10,(W-8)/6-4,H-20);if(a<k*1.2+((t*3)%6)){c.fillStyle=a%2?'rgba(122,60,255,.25)':'rgba(0,87,255,.25)';c.fillRect(4+a*(W-8)/6,10,(W-8)/6-4,H-20)}}}
+  if(i==1){for(let a=0;a<5;a++){const h=(H-14)*(.3+.6*Math.abs(Math.sin(t*1.3+a)));c.fillStyle='#0057ff';c.fillRect(6+a*(W-12)/5,H-4-h,(W-12)/5-6,h)}}
+  if(i==2){const cw=(W-8)/24;for(let a=0;a<288;a++){const x=4+(a%24)*cw,y=6+(a/24|0)*cw;if(y+cw>H)continue;c.fillStyle=a==137?'#0057ff':((a+((t*20)|0))%11?'#eee':'#cdd9ff');c.fillRect(x,y,cw-1,cw-1)}}
+  if(i==3){for(let a=0;a<120;a++){const x=4+((a*37)%113)/113*(W-8),y=6+((a*53)%97)/97*(H-12);c.fillStyle=(a+((t*8)|0))%17==0?'#0057ff':'#bbb';c.fillRect(x,y,2,2)}}
+ })}
+
+/* S4 molecules */
+const mol=$('#mol');const MC=[{n:'G',c:'#0057ff',x:.28,y:.38,name:'Galactomyces'},{n:'B',c:'#7a3cff',x:.70,y:.32,name:'Bifida'},{n:'L',c:'#00a37a',x:.5,y:.74,name:'Lactobacillus'}];
+MC.forEach((m,k)=>{m.at=[];for(let i=0;i<14;i++)m.at.push({a:i*2.399,r:.04+.1*Math.sqrt(i/14),s:.6+((i*31)%7)/7})});
+function s4(p,t){const[c,W,H]=fit(mol);c.clearRect(0,0,W,H);const R=Math.min(W,H);
+ c.strokeStyle='#eee';c.lineWidth=1;for(let x=0;x<W;x+=20){c.beginPath();c.moveTo(x,0);c.lineTo(x,H);c.stroke()}for(let y=0;y<H;y+=20){c.beginPath();c.moveTo(0,y);c.lineTo(W,y);c.stroke()}
+ const act=Math.floor(seg(p,.05,.8)*3.0001);$$('#gcards div').forEach((d,i)=>d.classList.toggle('on',i<act||(p>.02&&i==0)));
+ const ctr=MC.map(m=>[m.x*W,m.y*H]);
+ const link=seg(p,.75,.95);if(link>0){c.strokeStyle=`rgba(17,17,17,${link*.6})`;c.setLineDash([3,4]);c.beginPath();c.moveTo(...ctr[0]);c.lineTo(...ctr[1]);c.lineTo(...ctr[2]);c.closePath();c.stroke();c.setLineDash([]);
+  c.fillStyle='#111';c.font='600 12px JetBrains Mono,monospace';c.textAlign='center';c.globalAlpha=link;c.fillText('G.B.L BIO ENGINE',W/2,(ctr[0][1]+ctr[1][1]+ctr[2][1])/3+4);c.globalAlpha=1;c.textAlign='left'}
+ MC.forEach((m,k)=>{const vis=ease(seg(p,.03+k*.25,.2+k*.25));if(vis<=0)return;const[cx,cy]=ctr[k];
+  const pts=m.at.map((a,i)=>{const ang=a.a+t*.3*(k%2?-1:1);return[cx+Math.cos(ang)*a.r*R*vis*1.1,cy+Math.sin(ang)*a.r*R*vis*.9]});
+  c.strokeStyle=m.c;c.globalAlpha=.5*vis;c.lineWidth=1;pts.forEach((q,i)=>{if(i){const j=(i*5)%i;c.beginPath();c.moveTo(...pts[j]);c.lineTo(...q);c.stroke()}});
+  c.globalAlpha=vis;pts.forEach((q,i)=>{c.fillStyle=i==0?m.c:'#fff';c.strokeStyle=m.c;c.beginPath();c.arc(q[0],q[1],i==0?9:3.5*m.at[i].s+1,0,7);c.fill();c.stroke()});
+  c.fillStyle='#fff';c.font='700 11px JetBrains Mono';c.textAlign='center';c.fillText(m.n,cx,cy+4);c.textAlign='left';
+  c.fillStyle='#111';c.font='11px JetBrains Mono,monospace';c.fillText(m.name.toUpperCase(),cx-R*.14,cy+R*.2);c.fillStyle='#999';c.fillText('FERMENT.'+String(k+1).padStart(2,'0'),cx-R*.14,cy+R*.2+14);c.globalAlpha=1});}
+
+/* S5 device layers */
+const dv=$('#dev');const LY=[['EP','Electroporation','흡수 통로를 열어 유효 성분 전달'],['EMS','Electrical Muscle Stimulation','표정 근육 자극 · 탄력 윤곽 케어'],['RF','Radio Frequency','심부 온열 케어 · 피부 결과 탄력'],['HIFU','High-Intensity Focused Ultrasound','집속 초음파 에너지 · 리프팅 케어'],['LED','LED Light Therapy','파장별 광 케어 · 톤과 진정']];
+function s5(p,t){$('#p5').style.width=p*100+'%';const[c,W,H]=fit(dv);c.clearRect(0,0,W,H);const mob=W<560;
+ const ex=ease(seg(p,.05,.35)),act=Math.min(4,Math.floor(seg(p,.3,.95)*5));
+ const cx=mob?W*.3:W*.36,pw=mob?W*.38:Math.min(W*.32,260),ph=pw*.42,gap=ph*.25+ex*(mob?H*.11:H*.13),total=gap*4,top=H/2-total/2;
+ c.strokeStyle='#eee';c.lineWidth=1;for(let x=0;x<W;x+=24){c.beginPath();c.moveTo(x,0);c.lineTo(x,H);c.stroke()}
+ c.strokeStyle='#111';c.setLineDash([2,4]);c.beginPath();c.moveTo(cx,top-ph);c.lineTo(cx,top+total+ph);c.stroke();c.setLineDash([]);
+ for(let i=4;i>=0;i--){const y=top+i*gap,on=p>.3&&i==act;
+  // iso plate
+  c.beginPath();c.moveTo(cx,y-ph/2);c.lineTo(cx+pw/2,y);c.lineTo(cx,y+ph/2);c.lineTo(cx-pw/2,y);c.closePath();
+  c.fillStyle=on?'rgba(0,87,255,.12)':'rgba(255,255,255,.95)';c.fill();c.strokeStyle=on?'#0057ff':'#111';c.lineWidth=on?1.6:1;c.stroke();
+  c.beginPath();c.moveTo(cx-pw/2,y);c.lineTo(cx-pw/2,y+5);c.lineTo(cx,y+ph/2+5);c.lineTo(cx+pw/2,y+5);c.lineTo(cx+pw/2,y);c.stroke();
+  // pattern per layer
+  c.save();c.translate(cx,y);c.scale(1,.42);c.strokeStyle=on?'#0057ff':'#999';c.lineWidth=.8;
+  if(i==0)for(let a=0;a<6;a++){c.beginPath();c.arc(Math.cos(a)*pw*.18,Math.sin(a)*pw*.18,4,0,7);c.stroke()}
+  if(i==1){c.beginPath();for(let x=-pw*.3;x<pw*.3;x+=2)c.lineTo(x,Math.sin(x*.15+t*4)*8);c.stroke()}
+  if(i==2)for(let r=1;r<4;r++){c.beginPath();c.arc(0,0,r*pw*.07,0,7);c.stroke()}
+  if(i==3)for(let r=1;r<5;r++){c.beginPath();c.arc(0,0,pw*.3-r*pw*.06,Math.PI*.15,Math.PI*.85);c.stroke()}
+  if(i==4)for(let a=0;a<12;a++){c.beginPath();c.arc(Math.cos(a*.52)*pw*.22,Math.sin(a*.52)*pw*.22,3,0,7);c.fillStyle=on?(a%2?'#ff4d4d':'#ffb300'):'#ccc';c.fill()}
+  c.restore();
+  // callout
+  const vis=ex*(p>.3?(i<=act?1:.35):.35);
+  const lx=cx+pw/2+8,tx=mob?W*.56:W*.62;c.globalAlpha=vis;c.strokeStyle=on?'#0057ff':'#111';c.lineWidth=1;c.beginPath();c.moveTo(lx,y);c.lineTo(tx-8,y);c.stroke();c.fillStyle=c.strokeStyle;c.fillRect(tx-10,y-2,4,4);
+  c.fillStyle=on?'#0057ff':'#111';c.font=`700 ${mob?13:16}px JetBrains Mono,monospace`;c.fillText(String(i+1).padStart(2,'0')+' '+LY[i][0],tx,y-(mob?6:8));
+  c.fillStyle='#6b6b70';c.font=`${mob?9:11}px JetBrains Mono,monospace`;c.fillText(LY[i][1],tx,y+(mob?6:8));
+  if(!mob||on){c.fillStyle='#111';c.font=`${mob?10.5:13}px Pretendard,sans-serif`;c.fillText(LY[i][2],tx,y+(mob?20:26))}
+  c.globalAlpha=1}
+ c.fillStyle='#999';c.font='10px JetBrains Mono,monospace';c.fillText('LAYER STACK · CONCEPT',12,H-12)}
+
+function frame(ts){const t=ts/1000;drawMesh(t);s1(prog($('#s1')));s2(prog($('#s2')));s3(prog($('#s3')),t);s4(prog($('#s4')),t);s5(prog($('#s5')),t);requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+if(location.hash=='#static')$$('.rv').forEach(e=>e.classList.add('on'));
+</script></body></html>

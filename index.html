@@ -1,0 +1,286 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Introducing BASUP 1 — AI Meets K-Beauty</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--b:#0071e3;--t:#1d1d1f;--m:#6e6e73;--g:#f5f5f7}
+body{font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;color:var(--t);background:#fff;-webkit-font-smoothing:antialiased;word-break:keep-all}
+html,body{overflow-x:clip}
+a{color:inherit;text-decoration:none}
+nav{position:sticky;top:0;z-index:50;height:48px;background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.06)}
+nav .in{max-width:1024px;margin:auto;height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 22px;font-size:12px}
+nav img{height:15px}nav ul{display:flex;gap:30px;list-style:none}nav li{opacity:.85}nav li.nl{color:var(--b);font-weight:600;opacity:1}
+nav .btn{background:var(--b);color:#fff;padding:5px 12px;border-radius:980px}
+.sub{position:sticky;top:48px;z-index:40;background:rgba(251,251,253,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid #d2d2d7}
+.sub .in{max-width:1024px;margin:auto;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 22px}
+.sub b{font-size:21px;font-weight:600}.sub b i{font-style:normal;color:var(--b)}.sub span{font-size:12px;color:var(--m);margin-right:18px}
+.pill{display:inline-block;background:var(--b);color:#fff;border-radius:980px;padding:11px 22px;font-size:17px}.pill.s{padding:4px 12px;font-size:12px}
+.link{color:var(--b);font-size:19px}.link:after{content:" ›"}
+.ctas{display:flex;gap:28px;justify-content:center;align-items:center;margin-top:28px;flex-wrap:wrap}
+section{text-align:center}
+.gray{background:var(--g)}
+.eyebrow{font-size:21px;font-weight:600;color:#86868b;margin-bottom:8px}
+h1{font-size:clamp(56px,10vw,128px);font-weight:700;letter-spacing:-.04em;line-height:1}
+h2{font-size:clamp(36px,6vw,72px);font-weight:700;letter-spacing:-.03em;line-height:1.06}
+.lead{font-size:clamp(17px,2vw,24px);font-weight:500;line-height:1.4;max-width:720px;margin:18px auto 0;color:var(--m)}
+.grad{background:linear-gradient(90deg,#0071e3,#8e5cf7 55%,#e5568f);-webkit-background-clip:text;background-clip:text;color:transparent}
+.intro{font-size:clamp(20px,2.4vw,28px);font-weight:600;color:var(--t);margin-bottom:6px}
+.hero{padding:80px 20px 40px}
+.hero .img{margin:44px auto 0;max-width:980px;position:relative;border-radius:28px;overflow:hidden}
+.hero .img img{width:100%;display:block}
+.scanline{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--b),transparent);box-shadow:0 0 24px rgba(0,113,227,.7);animation:scan 4s ease-in-out infinite}
+@keyframes scan{0%,100%{top:8%}50%{top:70%}}
+.tag{position:absolute;font-size:13px;padding:8px 14px;border-radius:12px;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(0,0,0,.06);box-shadow:0 8px 30px rgba(0,0,0,.08);text-align:left}
+.tag small{display:block;color:var(--b);font-size:11px;letter-spacing:.08em}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);max-width:1024px;margin:auto;padding:80px 22px;gap:20px}
+.stats b{display:block;font-size:clamp(40px,5vw,64px);font-weight:700;letter-spacing:-.03em}.stats span{color:var(--m);font-size:15px}
+.blk{padding:120px 22px}
+.note{font-size:12px;color:#86868b;margin-top:10px}
+
+/* pinned */
+.pin{position:relative}
+.stick{position:sticky;top:100px;height:calc(100vh - 100px);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.ph-h{text-align:center;margin-bottom:24px}.ph-h h2{font-size:clamp(32px,4.6vw,56px)}
+.ph-h .lead{margin-top:10px;font-size:clamp(15px,1.6vw,19px)}
+
+/* scan */
+#scan{height:500vh;background:#fff}
+.scanwrap{display:flex;gap:48px;align-items:center;justify-content:center;width:100%;max-width:1080px}
+.face{position:relative;height:min(62vh,600px);aspect-ratio:1120/1200;border-radius:28px;overflow:hidden;background:var(--g);flex:none}
+.face img{width:100%;height:100%;display:block}
+.face .sl{position:absolute;height:3px;border-radius:3px;opacity:0;transition:opacity .3s}
+.face .glow{position:absolute;inset:0;pointer-events:none;transition:background .4s}
+.pt{position:absolute;width:18px;height:18px;margin:-9px;border-radius:50%;border:2px solid #fff;background:rgba(255,255,255,.4);box-shadow:0 0 0 0 rgba(0,113,227,.0);transition:all .35s}
+.pt.on{background:var(--b);box-shadow:0 0 0 8px rgba(0,113,227,.18),0 0 24px rgba(0,113,227,.7)}
+.pt.uv.on{background:#8e5cf7;box-shadow:0 0 0 8px rgba(142,92,247,.2),0 0 24px rgba(142,92,247,.8)}
+.pt i{position:absolute;left:24px;top:-4px;font-style:normal;font-size:11px;white-space:nowrap;background:rgba(255,255,255,.85);padding:2px 8px;border-radius:8px;color:var(--t)}
+.panel{width:380px;text-align:left}
+.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:22px}
+.steps div{height:4px;border-radius:4px;background:#e5e5ea;overflow:hidden}.steps div b{display:block;height:100%;width:0;background:var(--b)}
+.cur{font-size:13px;color:var(--m);margin-bottom:4px}.cur2{font-size:26px;font-weight:700;margin-bottom:22px;letter-spacing:-.02em}
+.gg{display:grid;gap:14px}
+.g .row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px}.g .row b{font-variant-numeric:tabular-nums}
+.g .bar{height:6px;border-radius:6px;background:#e5e5ea;overflow:hidden}.g .bar i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,#0071e3,#8e5cf7)}
+.demo{display:inline-block;font-size:11px;font-weight:600;color:#bf4800;background:#fff4e5;border-radius:6px;padding:3px 8px;margin-bottom:14px}
+
+/* formula */
+#formula{height:450vh;background:#fff}
+#formula .stick{padding:20px 0}
+.fstage{position:relative;width:100%;max-width:1100px;flex:1;min-height:0}
+#fc{position:absolute;inset:0;width:100%;height:100%}
+.flabel{position:absolute;left:50%;top:0;transform:translateX(-50%);display:flex;gap:10px}
+.flabel span{font-size:13px;padding:6px 14px;border-radius:980px;background:var(--g);color:#86868b;transition:all .3s;white-space:nowrap}
+.flabel span.on{background:var(--t);color:#fff}
+.fprods{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-around}
+.fprods div{text-align:center;opacity:0;transform:translateY(20px);transition:all .5s}
+.fprods div.on{opacity:1;transform:none}
+.fprods img{height:min(18vh,150px);mix-blend-mode:multiply;display:block;margin:auto}
+.fprods b{font-size:15px}
+
+/* device */
+#device{height:500vh;background:#fff}
+.dstage{position:relative;width:100%;max-width:1080px;flex:1;min-height:0}
+.dev{position:absolute;left:50%;top:50%;height:min(64vh,560px);aspect-ratio:234/536;transform:translate(-50%,-50%)}
+.dev .part{position:absolute;inset:0;background-size:100% 100%;border-radius:22px;will-change:transform}
+.dev .halo{position:absolute;left:50%;top:9%;width:160%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,113,227,.18),transparent 65%);opacity:0}
+.mod{position:absolute;left:50%;top:50%;width:62px;height:62px;margin:-31px;border-radius:50%;background:rgba(255,255,255,.75);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(0,0,0,.08);box-shadow:0 10px 30px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;opacity:0;will-change:transform}
+.mod.act{background:var(--b);color:#fff}
+.call{position:absolute;width:250px;text-align:left;opacity:0;transform:translateY(12px);transition:all .45s}
+.call.on{opacity:1;transform:none}
+.call small{color:var(--b);font-weight:600;font-size:12px;letter-spacing:.06em}.call h4{font-size:22px;margin:2px 0 4px}.call p{font-size:14px;color:var(--m);line-height:1.45}
+
+.lineup{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1024px;margin:60px auto 0}
+.prod{background:#fff;border-radius:28px;padding:30px 20px;box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.prod img{height:280px;object-fit:contain;mix-blend-mode:multiply}
+.prod .st{font-size:12px;color:#bf4800;font-weight:600}.prod h3{font-size:26px;margin:4px 0}.prod p{color:var(--m);font-size:15px}
+.lab{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;max-width:1024px;margin:60px auto 0;text-align:left}
+.lab .big{border-radius:28px;overflow:hidden;position:relative;min-height:420px;background:#000}
+.lab .big img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:.92}
+.lab .big div{position:absolute;left:28px;bottom:26px;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+.lab .big small{font-size:13px;letter-spacing:.1em}.lab .big h3{font-size:34px;letter-spacing:-.02em}
+.lab .side{display:grid;gap:20px}
+.lab .c{background:var(--g);border-radius:28px;padding:28px}
+.lab .c b{font-size:44px;letter-spacing:-.03em}.lab .c p{color:var(--m);font-size:15px;margin-top:4px}
+.gbl{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.gbl img{width:58px;height:58px;border-radius:14px;object-fit:cover}
+.final{padding:140px 22px;background:radial-gradient(ellipse at 50% 130%,#e3ecff,#fff 60%)}
+footer{background:var(--g);font-size:12px;color:var(--m);padding:30px 22px;line-height:1.7}
+footer .in{max-width:1024px;margin:auto;border-top:1px solid #d2d2d7;padding-top:18px}
+.r{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}.r.on{opacity:1;transform:none}
+
+@media(max-width:820px){
+ nav ul{display:none}.sub span{display:none}
+ .stats{grid-template-columns:1fr 1fr}.lineup,.lab{grid-template-columns:1fr}.blk{padding:80px 20px}.tag{display:none}.prod img{height:220px}
+ .scanwrap{flex-direction:column;gap:14px}.face{height:34vh}.panel{width:100%;max-width:360px}
+ .cur2{font-size:19px;margin-bottom:10px}.gg{gap:7px}.g .row{font-size:12px;margin-bottom:3px}.steps{margin-bottom:10px}.demo{margin-bottom:8px}
+ .ph-h{margin-bottom:12px}.flabel span{font-size:11px;padding:5px 9px}.flabel{gap:4px}.pt i{display:none}
+ .dev{height:36vh;top:34%}.call{width:auto;left:20px!important;right:20px!important;top:auto!important;bottom:0!important;text-align:center}
+ .mod{width:46px;height:46px;margin:-23px;font-size:12px}
+ .lab .big{min-height:300px}
+}
+</style></head><body>
+<nav><div class="in"><img src="assets/basup-logo.png" alt="BASUP"><ul><li>Skinlab Korea</li><li>AI 피부 분석</li><li>맞춤형 K-Beauty</li><li>Skinlab Ultra</li><li class="nl">BASUP Lab</li><li>상담</li></ul><a class="btn" href="#">무료 상담</a></div></nav>
+<div class="sub"><div class="in"><b>BASUP <i>1</i></b><div><span>개요</span><span>AI 스캔</span><span>처방</span><span>Ultra</span><span>Lab</span><a class="pill s" href="#">AI 피부 분석 시작</a></div></div></div>
+
+<section class="hero">
+ <p class="intro r">Introducing</p>
+ <h1 class="r">BASUP <span class="grad">1</span></h1>
+ <p class="lead r" style="color:var(--t);font-weight:600;margin-top:14px">AI Meets K-Beauty.</p>
+ <p class="lead r" style="margin-top:6px">측정하고, 처방하고, 작동시킨다. 내 피부를 위한 단 하나의 과학.</p>
+ <div class="ctas r"><a class="pill" href="#">AI 피부 분석 시작하기</a><a class="link" href="#scan">스캔 과정 보기</a></div>
+ <div class="img r"><img src="assets/hero-model.webp" alt=""><div class="scanline"></div>
+  <div class="tag" style="left:6%;top:26%"><small>MOISTURE</small>수분 보유도 분석</div>
+  <div class="tag" style="right:6%;top:40%"><small>SEBUM</small>피지 보유도 분석</div>
+  <div class="tag" style="left:9%;top:60%"><small>288 MATRIX</small>스킨 타입 매칭</div></div>
+</section>
+
+<section class="gray"><div class="stats">
+ <div class="r"><b>43+</b><span>년 K-Beauty R&amp;D</span></div><div class="r"><b>2만+</b><span>보유 레서피</span></div>
+ <div class="r"><b>288</b><span>스킨 타입 매트릭스</span></div><div class="r"><b>85%</b><span>재구독률</span></div></div></section>
+
+<!-- 1. SCAN -->
+<section id="scan" class="pin"><div class="stick">
+ <div class="ph-h"><p class="eyebrow">BASUP Skin Scanner</p><h2>6번의 스캔. <span class="grad">5개의 지표.</span></h2></div>
+ <div class="scanwrap">
+  <div class="face" id="face"><img src="assets/hero-model.webp" alt=""><div class="glow" id="glow"></div><div class="sl" id="sl"></div>
+   <div class="pt" style="left:44%;top:15%" data-z="0"><i>T-zone · 이마</i></div>
+   <div class="pt" style="left:31%;top:43%" data-z="1"><i>U-zone · 왼쪽 볼</i></div>
+   <div class="pt" style="left:57%;top:41%" data-z="2"><i>U-zone · 오른쪽 볼</i></div></div>
+  <div class="panel">
+   <div class="steps" id="steps"><div><b></b></div><div><b></b></div><div><b></b></div><div><b></b></div><div><b></b></div><div><b></b></div></div>
+   <p class="cur" id="cur">SCAN 1 / 6</p><p class="cur2" id="cur2">이마 · LED</p>
+   <span class="demo">데모 측정값 · 실제 결과 아님</span>
+   <div class="gg" id="gg"></div>
+  </div></div>
+</div></section>
+
+<!-- 2. FORMULA -->
+<section id="formula" class="pin"><div class="stick">
+ <div class="ph-h"><p class="eyebrow">Personalized Formula</p><h2>2만 개의 레서피에서<br><span class="grad">단 하나의 처방으로.</span></h2></div>
+ <div class="fstage" id="fstage"><canvas id="fc"></canvas>
+  <div class="flabel"><span id="fl0">20,000+ 레서피</span><span id="fl1">288 스킨 타입 매트릭스</span><span id="fl2">나의 3단계 처방</span></div>
+  <div class="fprods" id="fprods"><div><img src="assets/product-ampoule.webp" alt=""><b>앰플</b></div><div><img src="assets/product-serum.webp" alt=""><b>세럼</b></div><div><img src="assets/product-essence.webp" alt=""><b>에센스</b></div></div>
+ </div>
+</div></section>
+
+<!-- 3. DEVICE -->
+<section id="device" class="pin"><div class="stick">
+ <div class="ph-h"><p class="eyebrow">SKINLAB ULTRA</p><h2>5가지 기술. <span class="grad">하나의 디바이스.</span></h2></div>
+ <div class="dstage" id="dstage">
+  <div class="dev" id="dev"><div class="halo" id="halo"></div><div class="part" id="pBody"></div><div class="part" id="pHead"></div></div>
+ </div>
+</div></section>
+
+<section class="blk gray"><p class="eyebrow r">The Routine</p><h2 class="r">당신의 데이터로<br>처방된 3단계.</h2><p class="lead r">앰플 · 세럼 · 에센스. 정교한 레이어링.</p>
+ <div class="lineup">
+  <div class="prod r"><p class="st">STEP 01</p><img src="assets/product-ampoule.webp" alt=""><h3>앰플</h3><p>맞춤 처방 앰플</p></div>
+  <div class="prod r"><p class="st">STEP 02</p><img src="assets/product-serum.webp" alt=""><h3>세럼</h3><p>맞춤 처방 세럼</p></div>
+  <div class="prod r"><p class="st">STEP 03</p><img src="assets/product-essence.webp" alt=""><h3>에센스</h3><p>맞춤 처방 에센스</p></div></div>
+ <div class="ctas r"><a class="pill" href="#">맞춤 화장품 자세히 보기</a></div></section>
+
+<section class="blk" id="lab"><p class="eyebrow r">BASUP Lab</p><h2 class="r">피부 과학의<br><span class="grad">새로운 기준</span>을 세우다.</h2>
+ <p class="lead r">Skinlab Korea의 40여 년 화장품 연구 노하우와 AI 기술력이 만나는 곳.</p>
+ <div class="lab">
+  <div class="big r"><img src="assets/rd-center.webp" alt=""><div><small>R&amp;D CENTER</small><h3>기획부터 품질관리까지,<br>모든 공정을 자체적으로.</h3></div></div>
+  <div class="side">
+   <div class="c r"><b>43+</b><p>년 K-Beauty 연구개발 경험</p></div>
+   <div class="c r"><b style="font-size:30px">G.B.L Bio Engine</b><p>Galactomyces · Bifida · Lactobacillus 발효 기반 Skin Bio-Engine</p>
+    <div class="gbl"><img src="assets/gbl-galactomyces.png" alt=""><img src="assets/gbl-bifida.png" alt=""><img src="assets/gbl-lactobacillus.png" alt=""></div></div>
+  </div></div>
+ <div class="ctas r"><a class="pill" href="#">BASUP Lab 둘러보기</a><a class="link" href="#">Heritage</a></div></section>
+
+<section class="final"><h2 class="r">당신의 피부를<br>측정할 시간.</h2><p class="lead r">AI 피부 분석과 맞춤형 K-Beauty 솔루션을 경험해 보세요.</p>
+ <div class="ctas r"><a class="pill" href="#">무료 상담 예약하기</a><a class="link" href="#">멤버십·유통 신청</a></div></section>
+<footer><div class="in">프리미엄 AI 스킨테크 플랫폼 — AI 피부 분석, 맞춤형 K-Beauty, 그리고 Skinlab Korea의 R&amp;D 헤리티지.<br>* 'BASUP 1'은 시안용 제품명 제안이며, 스캔 섹션의 수치는 데모 값입니다.<br>© 2026 Skinlab Korea Co., Ltd. All Rights Reserved.</div></footer>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,seg=(p,a,b)=>cl((p-a)/(b-a));
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target)}}),{threshold:.12});
+$$('.r').forEach(el=>io.observe(el));
+function prog(el){const r=el.getBoundingClientRect();return cl(-r.top/(r.height-innerHeight))}
+const mobile=()=>innerWidth<=820;
+
+/* ---- scan ---- */
+const G=[['수분','Moisture',72],['유분','Sebum',38],['탄력','Elasticity',81],['색소','Pigmentation',24],['민감도','Sensitivity',46]];
+$('#gg').innerHTML=G.map(g=>`<div class="g"><div class="row"><span>${g[0]} <small style="color:#86868b">${g[1]}</small></span><b>0</b></div><div class="bar"><i></i></div></div>`).join('');
+const zones=['이마','왼쪽 볼','오른쪽 볼'],zy=[[4,28],[32,56],[30,54]],zx=[[28,62],[18,46],[44,72]];
+const pts=$$('.pt'),sl=$('#sl'),glow=$('#glow'),stepB=$$('#steps b'),gEls=$$('#gg .g');
+function scan(p){
+ const q=seg(p,.05,.92),n=q*6,i=Math.min(5,Math.floor(n)),f=n-i,zone=i>>1,uv=i%2;
+ stepB.forEach((b,k)=>b.style.width=(k<i?100:k==i?f*100:0)+'%');
+ $('#cur').textContent=q>=1?'SCAN COMPLETE':`SCAN ${i+1} / 6`;
+ $('#cur2').textContent=q>=1?'분석 완료 · 리포트 생성':`${zones[zone]} · ${uv?'UV':'LED'}`;
+ pts.forEach((pt,k)=>{pt.classList.toggle('on',k<zone||(k==zone&&(f>.5||uv))||q>=1);pt.classList.toggle('uv',k==zone&&uv)});
+ const c=uv?'142,92,247':'0,113,227';
+ if(q<1&&q>0){const y=zy[zone][0]+(zy[zone][1]-zy[zone][0])*(.5-.5*Math.cos(f*Math.PI*2));
+  Object.assign(sl.style,{opacity:1,top:y+'%',left:zx[zone][0]+'%',width:(zx[zone][1]-zx[zone][0])+'%',background:`rgb(${c})`,boxShadow:`0 0 18px 4px rgba(${c},.6)`});
+  glow.style.background=`radial-gradient(circle at ${(zx[zone][0]+zx[zone][1])/2}% ${(zy[zone][0]+zy[zone][1])/2}%,rgba(${c},.22),transparent 30%)`;
+ }else{sl.style.opacity=0;glow.style.background=q>=1?'rgba(0,113,227,.05)':'none'}
+ gEls.forEach((el,k)=>{const v=Math.round(G[k][2]*ease(cl(q*1.05-k*.03)));el.querySelector('b').textContent=v;el.querySelector('i').style.width=v+'%'});
+}
+
+/* ---- formula ---- */
+const cv=$('#fc'),ctx=cv.getContext('2d'),N=576;let W=0,H=0,D=[],T=[];
+const rnd=(s=>()=>(s=(s*16807)%2147483647)/2147483647)(7);
+for(let i=0;i<N;i++)D.push({a:rnd(),b:rnd(),j:rnd(),cell:i%288,prod:i%3,hue:rnd()});
+function fsize(){const r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1;W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+ const st=cv.getBoundingClientRect();T=$$('#fprods div').map(d=>{const b=d.getBoundingClientRect();return{x:b.left+b.width/2-st.left,y:b.top+b.height*.4-st.top}})}
+function formula(p){
+ if(!W)fsize();ctx.clearRect(0,0,W,H);
+ const a=ease(seg(p,.12,.42)),b=ease(seg(p,.55,.85));
+ ['#fl0','#fl1','#fl2'].forEach((s,k)=>$(s).classList.toggle('on',k==(p<.45?0:p<.55+.2?1:2)));
+ $$('#fprods div').forEach(d=>d.classList.toggle('on',p>.78));
+ const cols=mobile()?18:24,rows=288/cols,gw=Math.min(W*.86,mobile()?W*.9:760),cs=gw/cols,gh=cs*rows,gx=(W-gw)/2,gy=Math.max(50,(H*.62-gh)/2+30);
+ const t=performance.now()/1000;
+ for(const d of D){
+  const sx=W/2+Math.cos(d.a*6.283)*(W*.46)*Math.sqrt(d.b)+Math.sin(t+d.j*9)*6, sy=50+(H*.62)/2+Math.sin(d.a*6.283)*(H*.3)*Math.sqrt(d.b)+Math.cos(t+d.j*7)*6;
+  const cx=gx+(d.cell%cols+.5)*cs, cy=gy+(Math.floor(d.cell/cols)+.5)*cs;
+  const tg=T[d.prod]||{x:W/2,y:H-60},px=tg.x+Math.cos(d.j*6.283)*14*d.b,py=tg.y+Math.sin(d.j*6.283)*14*d.b;
+  const bb=cl(b*1.3-d.j*.3);
+  let x=sx+(cx-sx)*a,y=sy+(cy-sy)*a;x+=(px-x)*bb;y+=(py-y)*bb;
+  const sel=[17,140,231].includes(d.cell);
+  ctx.fillStyle=b>0?`rgba(${sel?'0,113,227':'142,92,247'},${sel?.9:.55*(1-bb*.6)})`:`hsla(${210+d.hue*120},80%,${55+d.b*10}%,.65)`;
+  ctx.beginPath();ctx.arc(x,y,a>.9&&b==0?cs*.3:2.2,0,7);ctx.fill();
+ }
+ if(a>.95&&b<.2){[17,140,231].forEach(c=>{ctx.strokeStyle='#0071e3';ctx.lineWidth=2;ctx.strokeRect(gx+(c%cols)*cs+1,gy+Math.floor(c/cols)*cs+1,cs-2,cs-2)})}
+}
+
+/* ---- device ---- */
+const M=[['EP','Electroporation','피부 흡수 통로를 열어 유효 성분의 전달을 극대화합니다.'],['EMS','Electrical Muscle Stimulation','표정 근육을 자극해 탄력 있는 윤곽을 케어합니다.'],['RF','Radio Frequency','심부 온열 케어로 피부 결과 탄력을 개선합니다.'],['HIFU','High-Intensity Focused Ultrasound','집속 초음파 에너지로 리프팅 케어를 제공합니다.'],['LED','LED Light Therapy','파장별 광 케어로 피부 톤과 진정을 케어합니다.']];
+const ds=$('#dstage');
+M.forEach((m,k)=>{ds.insertAdjacentHTML('beforeend',`<div class="mod" id="m${k}">${m[0]}</div><div class="call" id="c${k}"><small>0${k+1} · ${m[0]}</small><h4>${m[1]}</h4><p>${m[2]}</p></div>`)});
+const img='assets/device-crop.webp';
+$('#pBody').style.cssText=`background-image:url(${img});clip-path:inset(20% 0 0 0)`;
+$('#pHead').style.cssText=`background-image:url(${img});clip-path:inset(3% 0 80% 48% round 24px)`;
+const slots=[[-1,.18],[1,.22],[-1,.5],[1,.56],[-1,.82]];
+function device(p){
+ const sw=ds.clientWidth,sh=ds.clientHeight,mob=mobile();
+ const e=ease(seg(p,.04,.2));
+ const dx=mob?0:-0;
+ $('#pHead').style.transform=`translate(${dx}px,${-e*(mob?40:70)}px) rotate(${-e*6}deg)`;
+ $('#pBody').style.transform=`translate(${dx}px,${e*(mob?10:20)}px)`;
+ $('#halo').style.opacity=e;$('#halo').style.transform=`translate(-50%,calc(-50% - ${e*(mob?40:70)}px))`;
+ const devH=$('#dev').offsetHeight,hx=sw/2,hy=(mob?sh*.36:sh/2)-devH/2+devH*.09-e*(mob?40:70);
+ const act=Math.min(4,Math.floor(seg(p,.22,.97)*5));
+ M.forEach((m,k)=>{
+  const o=ease(seg(p,.2+k*.03,.32+k*.03)),mo=$('#m'+k),c=$('#c'+k);
+  let tx,ty;
+  if(mob){tx=sw/2+(k-2)*Math.min(66,sw/5.4);ty=sh*.66}
+  else{tx=sw/2+slots[k][0]*Math.min(sw*.2,230);ty=sh*slots[k][1]}
+  mo.style.opacity=o;mo.style.transform=`translate(${(hx-sw/2)+(tx-hx)*o}px,${(hy-sh/2)+(ty-hy)*o}px) scale(${.4+.6*o})`;
+  const on=p>.22&&k==act||(p>.97);mo.classList.toggle('act',k==act&&p>.22);
+  if(mob){c.classList.toggle('on',k==act&&p>.22)}
+  else{c.classList.toggle('on',p>.22+k*.15);
+   c.style.left=(slots[k][0]<0?tx-31-24-250:tx+31+24)+'px';c.style.top=(ty-36)+'px';c.style.textAlign=slots[k][0]<0?'right':'left';
+   c.style.opacity=p>.22+k*.15?(k==act?1:.45):0}
+ });
+}
+
+let need=true;
+function frame(){
+ scan(prog($('#scan')));formula(prog($('#formula')));device(prog($('#device')));
+ requestAnimationFrame(frame)}
+addEventListener('resize',()=>{W=0});
+requestAnimationFrame(frame);
+if(location.hash==='#static')$$('.r').forEach(el=>el.classList.add('on'));
+</script></body></html>
