@@ -97,9 +97,9 @@ nav li a{position:relative}nav li a:after{content:"";position:absolute;left:0;ri
 #fc{position:absolute;inset:0;width:100%;height:100%}
 .flabel{position:absolute;left:50%;top:0;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
 .flabel span{font-size:12px;padding:7px 14px;border:1px solid var(--line);color:#86868b;transition:all .3s;white-space:nowrap}.flabel span.on{background:var(--t);color:#fff;border-color:var(--t)}
-.fprods{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-around}
+.fprods{position:absolute;left:0;right:0;top:56px;bottom:0;display:flex;justify-content:center;align-items:flex-end;gap:clamp(24px,5vw,90px);pointer-events:none}
 .fprods div{text-align:center;opacity:0;transform:translateY(20px);transition:all .5s}.fprods div.on{opacity:1;transform:none}
-.fprods img{height:min(20vh,170px);mix-blend-mode:multiply;margin:auto}.fprods b{font-size:14px}
+.fprods div{display:flex;flex-direction:column;align-items:center}.fprods img{height:min(54vh,560px);width:auto;margin:0 auto 14px;filter:drop-shadow(0 30px 40px rgba(60,40,120,.18))}.fprods b{font-size:clamp(18px,1.6vw,24px);font-weight:700;letter-spacing:-.01em}.fprods b small{display:block;font:500 11px var(--mono,monospace);letter-spacing:.2em;color:#86868b;margin-top:4px}
 #formula .copy{max-width:min(520px,36vw)}
 /* gbl */
 #gbl .bg img{inset:0;width:100%;height:100%;object-fit:cover}
@@ -159,7 +159,7 @@ footer{border-top:1px solid var(--line);font-size:12px;color:var(--m);padding:34
  .fz{left:0;right:0;width:auto;top:66px;bottom:auto;height:52%}
  #formula .copy{max-width:none}
  .flabel span{font-size:10px;padding:5px 7px}.flabel{gap:3px}
- .fprods img{height:13vh}
+ .fz{height:62%}.fprods{gap:4vw;top:44px}.fprods img{height:33vh;margin-bottom:8px}#formula .btns{display:none}#formula .H{font-size:34px}#formula .copy{bottom:28px}.fprods b{font-size:16px}
  .dstage{left:0;right:0;width:auto;top:56px;bottom:auto;height:45%}
  .dev{height:30vh;left:50%;top:42%}.mod{width:46px;height:46px;margin:-23px;font-size:11px}
  #ultra .copy{max-width:none}.ucall{min-height:96px;margin-top:14px;padding-top:10px}.ucall h4{font-size:19px}.ucall p{font-size:13px}
@@ -218,7 +218,7 @@ footer{border-top:1px solid var(--line);font-size:12px;color:var(--m);padding:34
 <section class="full" id="formula" data-label="PERSONALIZED FORMULA">
  <div class="fz" id="fstage"><canvas id="fc"></canvas>
   <div class="flabel"><span id="fl0">20,000+ 레서피</span><span id="fl1">288 매트릭스</span><span id="fl2">3단계 처방</span></div>
-  <div class="fprods" id="fprods"><div><img src="assets/product-ampoule.webp" alt=""><b>앰플</b></div><div><img src="assets/product-serum.webp" alt=""><b>세럼</b></div><div><img src="assets/product-essence.webp" alt=""><b>에센스</b></div></div></div>
+  <div class="fprods" id="fprods"><div><img src="assets/product-ampoule-big.webp" alt="앰플"><b>앰플<small>AMPOULE</small></b></div><div><img src="assets/product-serum-big.webp" alt="세럼"><b>세럼<small>SERUM</small></b></div><div><img src="assets/product-essence-big.webp" alt="에센스"><b>에센스<small>ESSENCE</small></b></div></div></div>
  <div class="copy"><p class="eb mono">04 — Personalized Formula</p><h2 class="H split">20,000<br>recipes.<br><span class="gr">One formula.</span></h2>
   <p class="K lines">2만 개의 레서피에서 단 하나의 처방으로.</p>
   <div class="btns fade"><a class="btn mag" href="#gbl">Learn more</a></div></div>
@@ -326,23 +326,23 @@ const cv=$('#fc'),ctx=cv.getContext('2d'),N=576;let W=0,H=0,D=[],T=[],fP=0,fVis=
 const rnd=(s=>()=>(s=(s*16807)%2147483647)/2147483647)(7);
 for(let i=0;i<N;i++)D.push({a:rnd(),b:rnd(),j:rnd(),cell:i%288,prod:i%3,hue:rnd()});
 function fsize(){const r=cv.getBoundingClientRect(),dpr=Math.min(2,devicePixelRatio||1);W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
- T=$$('#fprods div').map(d=>{const b=d.getBoundingClientRect();return{x:b.left+b.width/2-r.left,y:b.top+b.height*.4-r.top}})}
+ T=$$('#fprods img').map(d=>{const b=d.getBoundingClientRect();return{x:b.left+b.width/2-r.left,y:b.top+b.height/2-r.top,w:b.width,h:b.height}})}
 function formula(p){if(!W)fsize();ctx.clearRect(0,0,W,H);
  const a=ease(seg(p,.1,.4)),b=ease(seg(p,.55,.85));
  ['#fl0','#fl1','#fl2'].forEach((s,k)=>$(s).classList.toggle('on',k==(p<.45?0:p<.75?1:2)));
- $$('#fprods div').forEach(d=>d.classList.toggle('on',p>.78));
+ $$('#fprods div').forEach(d=>d.classList.toggle('on',p>.8));
  const cols=mobile()?18:24,rows=288/cols,top=44,avail=H*.62,gw=Math.min(W*.9,avail/rows*cols,760),cs=gw/cols,gh=cs*rows,gx=(W-gw)/2,gy=top+(avail-gh)/2;
  const t=performance.now()/1000;
  for(const d of D){const sx=W/2+Math.cos(d.a*6.283)*(W*.46)*Math.sqrt(d.b)+Math.sin(t+d.j*9)*6,sy=top+avail/2+Math.sin(d.a*6.283)*(avail*.5)*Math.sqrt(d.b)+Math.cos(t+d.j*7)*6;
   const cx=gx+(d.cell%cols+.5)*cs,cy=gy+(Math.floor(d.cell/cols)+.5)*cs;
-  const tg=T[d.prod]||{x:W/2,y:H-60},px=tg.x+Math.cos(d.j*6.283)*14*d.b,py=tg.y+Math.sin(d.j*6.283)*14*d.b;
+  const tg=T[d.prod]||{x:W/2,y:H-60},px=tg.x+(d.a-.5)*(tg.w||28)*.55,py=tg.y+(d.hue-.5)*(tg.h||28)*.9;
   const bb=cl(b*1.3-d.j*.3);let x=sx+(cx-sx)*a,y=sy+(cy-sy)*a;x+=(px-x)*bb;y+=(py-y)*bb;
   const sel=[17,140,231].includes(d.cell);
-  ctx.fillStyle=b>0?`rgba(${sel?'0,113,227':'142,92,247'},${sel?.9:.55*(1-bb*.6)})`:`hsla(${210+d.hue*120},80%,${55+d.b*10}%,.65)`;
-  ctx.beginPath();ctx.arc(x,y,a>.9&&b==0?cs*.3:2.2,0,7);ctx.fill()}
+  ctx.fillStyle=b>0?`rgba(${sel?'0,113,227':'142,92,247'},${(sel?.9:.55*(1-bb*.6))*(1-.85*seg(p,.84,.97))})`:`hsla(${210+d.hue*120},80%,${55+d.b*10}%,.65)`;
+  ctx.beginPath();ctx.arc(x,y,a>.9&&b==0?cs*.3:2.2+bb*1.2,0,7);ctx.fill()}
  if(a>.95&&b<.2)[17,140,231].forEach(c=>{ctx.strokeStyle='#0071e3';ctx.lineWidth=2;ctx.strokeRect(gx+(c%cols)*cs+1,gy+Math.floor(c/cols)*cs+1,cs-2,cs-2)})}
 (function loop(){requestAnimationFrame(loop);if(fVis)formula(fP)})();
-addEventListener('resize',()=>{W=0});
+addEventListener('resize',()=>{W=0});$$('#fprods img').forEach(i=>i.addEventListener('load',()=>{W=0}));
 /* ---- ULTRA ---- */
 const M=[['EP','Electroporation','피부 흡수 통로를 열어 유효 성분의 전달을 극대화합니다.'],['EMS','Electrical Muscle Stimulation','표정 근육을 자극해 탄력 있는 윤곽을 케어합니다.'],['RF','Radio Frequency','심부 온열 케어로 피부 결과 탄력을 개선합니다.'],['HIFU','High-Intensity Focused Ultrasound','집속 초음파 에너지로 리프팅 케어를 제공합니다.'],['LED','LED Light Therapy','파장별 광 케어로 피부 톤과 진정을 케어합니다.']];
 const ds=$('#dstage');M.forEach((m,k)=>ds.insertAdjacentHTML('beforeend',`<div class="mod" id="m${k}">${m[0]}</div>`));
